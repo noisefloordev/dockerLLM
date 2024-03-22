@@ -12,8 +12,10 @@ WORKDIR /root
 # Also includes exllama
 # We remove the ExLlama automatically installed by text-generation-webui
 # so we're always up-to-date with any ExLlama changes, which will auto compile its own extension
+# Remove the current broken version of exllamav2
 RUN git clone https://github.com/oobabooga/text-generation-webui && \
     cd text-generation-webui && \
+    pip3 uninstall exllamav2 \
     pip3 install -r requirements.txt && \
     bash -c 'for req in extensions/*/requirements.txt ; do pip3 install -r "$req" ; done' && \
     #pip3 uninstall -y exllama && \
